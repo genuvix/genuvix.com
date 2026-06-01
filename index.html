@@ -1,541 +1,724 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Genuvix</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Genuvix - Smart Software Solutions</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.ico"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --dark-blue:   #1a2e5a;
+      --mid-blue:    #2c4a8c;
+      --light-blue:  #5b82c5;
+      --accent-blue: #4170b8;
+      --white:       #ffffff;
+      --off-white:   #f4f6fb;
+      --text-muted:  #6b7fa3;
+    }
 
-  :root {
-    --black: #080810;
-    --surface: #0f0f1a;
-    --card: #13131f;
-    --border: rgba(255,255,255,0.07);
-    --accent: #1a73e8;
-    --accent2: #0d3b8c;
-    --text: #f0eeff;
-    --muted: rgba(240,238,255,0.45);
-    --font-head: 'Syne', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-  }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: var(--dark-blue);
+      background: var(--white);
+    }
 
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--dark-blue);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white) !important;
+      letter-spacing: 1px;
+    }
+    .navbar-brand span { color: var(--light-blue); }
+    .nav-link {
+      color: rgba(255,255,255,0.82) !important;
+      font-weight: 500;
+      margin: 0 0.25rem;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--white) !important; }
+    .navbar-toggler { border-color: rgba(255,255,255,0.3); }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.85%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .btn-nav {
+      background: var(--light-blue);
+      color: var(--white) !important;
+      border-radius: 6px;
+      padding: 0.4rem 1.1rem;
+      font-weight: 600;
+      transition: background .2s;
+    }
+    .btn-nav:hover { background: var(--accent-blue) !important; }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.1rem 5vw;
-    background: rgba(8,8,16,0.85);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo {
-    font-family: var(--font-head);
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    color: #0d3b8c;
-    text-decoration: none;
-  }
-  .logo span { color: #1a73e8; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    text-decoration: none;
-    color: var(--muted);
-    font-size: 0.9rem;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--text); }
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, var(--mid-blue) 60%, var(--accent-blue) 100%);
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      top: -120px; right: -150px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      bottom: -80px; left: 5%;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: .3rem 1rem;
+      font-size: .85rem;
+      letter-spacing: .5px;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.18;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 span { color: var(--light-blue); }
+    .hero p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.78);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .btn-primary-custom {
+      background: var(--white);
+      color: var(--dark-blue);
+      border: none;
+      border-radius: 8px;
+      padding: .75rem 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all .2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary-custom:hover {
+      background: var(--off-white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    .btn-outline-custom {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.45);
+      border-radius: 8px;
+      padding: .73rem 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all .2s;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: .75rem;
+    }
+    .btn-outline-custom:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.1);
+    }
+    .hero-logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-logo-wrap img {
+      width: min(340px, 80vw);
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.3));
+    }
 
-  #hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center;
-    padding: 10rem 5vw 6rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-glow {
-    position: absolute;
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(26,115,232,0.18) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -55%);
-    pointer-events: none;
-  }
-  .hero-glow2 {
-    position: absolute;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(13,59,140,0.12) 0%, transparent 70%);
-    top: 60%; left: 60%;
-    pointer-events: none;
-  }
-  .tag {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #1a73e8;
-    border: 1px solid rgba(26,115,232,0.35);
-    padding: 0.3rem 1rem;
-    border-radius: 100px;
-    margin-bottom: 1.8rem;
-  }
-  h1 {
-    font-family: var(--font-head);
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-    margin-bottom: 1.5rem;
-    position: relative;
-  }
-  h1 .accent { color: #1a73e8; }
-  .hero-sub {
-    max-width: 560px;
-    color: var(--muted);
-    font-size: 1.1rem;
-    font-weight: 300;
-    line-height: 1.75;
-    margin: 0 auto 2.5rem;
-    position: relative;
-  }
-  .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
-  .btn {
-    display: inline-block;
-    text-decoration: none;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 0.8rem 2rem;
-    border-radius: 8px;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-  }
-  .btn-primary { background: #1a73e8; color: #fff; }
-  .btn-primary:hover { background: #1557b0; transform: translateY(-2px); }
-  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn-ghost:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--dark-blue);
+      padding: 2rem 0;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .stat-item .lbl {
+      font-size: .85rem;
+      color: var(--light-blue);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
 
-  section { padding: 7rem 5vw; }
-  .section-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #1a73e8;
-    margin-bottom: 0.75rem;
-  }
-  h2 {
-    font-family: var(--font-head);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 1.25rem;
-  }
+    /* ── SECTION SHARED ── */
+    section { padding: 5rem 0; }
+    .section-label {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--light-blue);
+      margin-bottom: .5rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--dark-blue);
+      line-height: 1.22;
+    }
+    .section-title span { color: var(--light-blue); }
+    .section-body {
+      font-size: 1.05rem;
+      color: #4a5c7a;
+      line-height: 1.75;
+      max-width: 640px;
+    }
 
-  #about { background: var(--surface); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .about-text p { color: var(--muted); margin-bottom: 1rem; font-weight: 300; }
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-  }
-  .stat-num {
-    font-family: var(--font-head);
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1a73e8;
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-  .stat-label { font-size: 0.85rem; color: var(--muted); }
+    /* ── ABOUT ── */
+    .about { background: var(--off-white); }
+    .about-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--light-blue);
+      box-shadow: 0 2px 12px rgba(26,46,90,0.07);
+      height: 100%;
+    }
+    .about-card h5 {
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: .5rem;
+    }
+    .about-card p { color: #4a5c7a; font-size: .95rem; }
+    .about-card .icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--mid-blue), var(--light-blue));
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
 
-  #services { max-width: 1100px; margin: 0 auto; }
-  .services-intro { max-width: 540px; margin-bottom: 4rem; }
-  .services-intro p { color: var(--muted); font-weight: 300; }
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .service-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .service-card:hover { border-color: rgba(26,115,232,0.4); transform: translateY(-4px); }
-  .service-icon {
-    width: 44px; height: 44px;
-    background: rgba(26,115,232,0.13);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.25rem;
-  }
-  .service-icon svg { width: 22px; height: 22px; stroke: #1a73e8; fill: none; stroke-width: 1.8; }
-  .service-card h3 {
-    font-family: var(--font-head);
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-  }
-  .service-card p { color: var(--muted); font-size: 0.92rem; font-weight: 300; line-height: 1.65; }
+    /* ── PRODUCTS ── */
+    .products { background: var(--white); }
+    .product-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(26,46,90,0.1);
+      transition: transform .25s, box-shadow .25s;
+      height: 100%;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(26,46,90,0.18);
+    }
+    .product-card-header {
+      background: linear-gradient(135deg, var(--dark-blue), var(--mid-blue));
+      padding: 2.5rem 2rem 1.8rem;
+      position: relative;
+    }
+    .product-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: .25rem .85rem;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .product-card-header h3 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: .4rem;
+    }
+    .product-card-header p {
+      color: rgba(255,255,255,0.72);
+      font-size: .95rem;
+    }
+    .product-card-body {
+      padding: 2rem;
+      background: var(--white);
+    }
+    .product-module {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e8edf5;
+    }
+    .product-module:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .module-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 10px;
+      background: var(--off-white);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mid-blue);
+      font-size: 1.1rem;
+    }
+    .module-icon.active { background: linear-gradient(135deg, var(--mid-blue), var(--light-blue)); color: white; }
+    .product-module h6 { font-weight: 700; color: var(--dark-blue); margin-bottom: .2rem; }
+    .product-module p { font-size: .88rem; color: var(--text-muted); margin: 0; }
+    .feature-pill {
+      display: inline-block;
+      background: var(--off-white);
+      color: var(--mid-blue);
+      border-radius: 20px;
+      padding: .3rem .9rem;
+      font-size: .8rem;
+      font-weight: 600;
+      margin: .25rem .2rem;
+    }
 
-  #projects { background: var(--surface); padding: 7rem 5vw; }
-  .projects-inner { max-width: 1100px; margin: 0 auto; }
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    margin-top: 3rem;
-  }
-  .project-badge {
-    display: inline-block;
-    background: rgba(26,115,232,0.12);
-    color: #1a73e8;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.8rem;
-    border-radius: 100px;
-    border: 1px solid rgba(26,115,232,0.3);
-    margin-bottom: 1rem;
-  }
-  .project-text h3 {
-    font-family: var(--font-head);
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.75rem;
-  }
-  .project-text p { color: var(--muted); font-weight: 300; margin-bottom: 1.5rem; }
-  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .feature-list li {
-    font-size: 0.9rem; color: var(--muted);
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .feature-list li::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #1a73e8;
-    flex-shrink: 0;
-  }
-  .project-visual {
-    background: linear-gradient(135deg, rgba(26,115,232,0.1), rgba(13,59,140,0.07));
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 2rem;
-    min-height: 260px;
-    display: flex; flex-direction: column; gap: 0.75rem;
-  }
-  .mock-header {
-    display: flex; align-items: center; gap: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .mock-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .mock-row {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.7rem 1rem;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.8rem;
-  }
-  .mock-row .name { color: var(--text); font-weight: 500; }
-  .mock-row .time { color: var(--muted); }
-  .mock-pill { font-size: 0.7rem; padding: 0.15rem 0.6rem; border-radius: 100px; font-weight: 500; }
-  .pill-blue { background: rgba(26,115,232,0.18); color: #6aabff; }
-  .pill-dark { background: rgba(13,59,140,0.3); color: #90b4f8; }
-  .pill-orange { background: rgba(255,160,80,0.15); color: #ffb366; }
+    /* ── CONTACT ── */
+    .contact { background: var(--dark-blue); }
+    .contact .section-title { color: var(--white); }
+    .contact .section-body { color: rgba(255,255,255,0.7); max-width: 100%; }
+    .contact-form-wrap {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 2.5rem;
+    }
+    .contact-form-wrap .form-control,
+    .contact-form-wrap .form-select {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      border-radius: 8px;
+    }
+    .contact-form-wrap .form-control::placeholder { color: rgba(255,255,255,0.4); }
+    .contact-form-wrap .form-control:focus,
+    .contact-form-wrap .form-select:focus {
+      background: rgba(255,255,255,0.12);
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(91,130,197,0.25);
+      color: var(--white);
+    }
+    .contact-form-wrap label { color: rgba(255,255,255,0.8); font-weight: 500; margin-bottom: .4rem; }
+    .contact-form-wrap select option { background: var(--dark-blue); }
+    .btn-submit {
+      background: var(--light-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: .75rem 2.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all .2s;
+      width: 100%;
+    }
+    .btn-submit:hover {
+      background: var(--accent-blue);
+      transform: translateY(-1px);
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .contact-info-item .ci-icon {
+      width: 46px; height: 46px; flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--light-blue);
+      font-size: 1.2rem;
+    }
+    .contact-info-item h6 { color: rgba(255,255,255,0.6); font-size: .8rem; text-transform: uppercase; letter-spacing: .5px; margin-bottom: .2rem; }
+    .contact-info-item p { color: var(--white); font-weight: 500; margin: 0; }
 
-  #contact { max-width: 700px; margin: 0 auto; text-align: center; }
-  #contact p { color: var(--muted); font-weight: 300; margin-bottom: 2.5rem; }
-  .contact-form { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  label { font-size: 0.82rem; color: var(--muted); }
-  input, textarea {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.2s;
-    resize: vertical;
-  }
-  input:focus, textarea:focus { border-color: rgba(26,115,232,0.5); }
-  input::placeholder, textarea::placeholder { color: rgba(240,238,255,0.2); }
-  .submit-btn {
-    background: #1a73e8;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.9rem 2.5rem;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    align-self: center;
-    transition: background 0.2s, transform 0.2s;
-    margin-top: 0.5rem;
-  }
-  .submit-btn:hover { background: #1557b0; transform: translateY(-2px); }
+    /* ── FOOTER ── */
+    footer {
+      background: #111e3a;
+      padding: 2rem 0;
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: .88rem;
+    }
+    footer a { color: var(--light-blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
 
-  footer {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    padding: 2.5rem 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  footer .logo { font-size: 1.1rem; }
-  footer p { color: var(--muted); font-size: 0.85rem; }
+    /* ── DIVIDER ── */
+    .divider {
+      width: 48px; height: 4px;
+      background: linear-gradient(90deg, var(--mid-blue), var(--light-blue));
+      border-radius: 2px;
+      margin: 1rem 0 1.5rem;
+    }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-content > * { opacity: 0; animation: fadeUp 0.7s ease forwards; }
-  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
-  .hero-content > *:nth-child(2) { animation-delay: 0.25s; }
-  .hero-content > *:nth-child(3) { animation-delay: 0.4s; }
-  .hero-content > *:nth-child(4) { animation-delay: 0.55s; }
+    /* ── SCROLL ANIMATION ── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-  @media (max-width: 768px) {
-    .about-grid, .services-grid, .project-card, .form-row { grid-template-columns: 1fr; }
-    .project-card { padding: 2rem; }
-    .about-stats { grid-template-columns: 1fr 1fr; }
-  }
-</style>
+    @media (max-width: 768px) {
+      .btn-outline-custom { margin-left: 0; margin-top: .5rem; }
+      .hero { padding: 4rem 0; min-height: auto; }
+      .hero-logo-wrap { margin-top: 2.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <a href="#hero" class="logo">genu<span>vix</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">GENU<span>VIX</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="nav-link btn-nav" href="#contact">Get in Touch</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
-<section id="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-content">
-    <div class="tag">Software Systems · Innovation · Simplicity</div>
-    <h1>We build software<br>that <span class="accent">actually works.</span></h1>
-    <p class="hero-sub">Genuvix crafts modern software systems for ambitious businesses — from smart reservation platforms to full-scale enterprise solutions.</p>
-    <div class="btn-group">
-      <a href="#projects" class="btn btn-primary">See our work</a>
-      <a href="#contact" class="btn btn-ghost">Get in touch</a>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="about-grid">
-    <div class="about-text">
-      <p class="section-label">Who we are</p>
-      <h2>Built by builders, for builders.</h2>
-      <p>Genuvix is a software systems company driven by a simple belief: great technology should be fast, reliable, and elegant. We partner with businesses to design and ship software that solves real problems.</p>
-      <p>From ideation to deployment, we handle the full product lifecycle — so our clients can focus on what they do best.</p>
-      <a href="#contact" class="btn btn-primary" style="display:inline-block; margin-top:1.5rem;">Work with us</a>
-    </div>
-    <div class="about-stats">
-      <div class="stat-card">
-        <div class="stat-num">01</div>
-        <div class="stat-label">Active project live</div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 hero-content">
+        <div class="hero-eyebrow">Software Built for Business</div>
+        <h1>Smart Tools for <span>Modern Operations</span></h1>
+        <p>Genuvix develops purpose-built software that helps hospitality and property businesses run smarter, faster, and with less friction.</p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="#products" class="btn-primary-custom">Explore Our Products</a>
+          <a href="#contact" class="btn-outline-custom">Talk to Us</a>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Focused on quality</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Ideas in the pipeline</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Committed support</div>
+      <div class="col-lg-6 hero-logo-wrap">
+        <img src="genuvix-logo.png" alt="Genuvix Logo" onerror="this.style.display='none'"/>
       </div>
     </div>
   </div>
 </section>
 
-<section id="services">
-  <div style="max-width:1100px; margin:0 auto;">
-    <div class="services-intro">
-      <p class="section-label">What we do</p>
-      <h2>End-to-end software systems.</h2>
-      <p>We cover the entire stack — strategy, design, development, and deployment. Whatever your challenge, we have the tools and talent to tackle it.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="num">2+</div>
+          <div class="lbl">Products</div>
         </div>
-        <h3>Web Systems</h3>
-        <p>Fast, scalable web applications built with modern frameworks. Responsive by design, performant by default.</p>
       </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="num">24/7</div>
+          <div class="lbl">Support</div>
         </div>
-        <h3>Mobile Systems</h3>
-        <p>Native and cross-platform mobile experiences that feel right at home on any device.</p>
       </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="num">100%</div>
+          <div class="lbl">Cloud-Based</div>
         </div>
-        <h3>SaaS Platforms</h3>
-        <p>We design and ship subscription software with great UX, robust APIs, and multi-tenant architecture.</p>
       </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="num">Fast</div>
+          <div class="lbl">Onboarding</div>
         </div>
-        <h3>System Architecture</h3>
-        <p>From feature prioritisation to infrastructure design — we help teams make smart decisions, faster.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
-        <h3>API & Integrations</h3>
-        <p>Connect your tools and systems seamlessly. We build the glue that makes your stack actually sing.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3>Consulting</h3>
-        <p>Embedded technical expertise when you need it. Architecture reviews, team mentoring, and more.</p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="projects">
-  <div class="projects-inner">
-    <p class="section-label">Our work</p>
-    <h2>First project, live.</h2>
-    <div class="project-card">
-      <div class="project-text">
-        <div class="project-badge">In development</div>
-        <h3>TableFlow — Restaurant Reservation System</h3>
-        <p>A smart, modern reservation platform built for restaurants of all sizes. Reduce no-shows, streamline bookings, and give guests a seamless experience from first click to final bite.</p>
-        <ul class="feature-list">
-          <li>Real-time table availability management</li>
-          <li>Automated SMS & email reminders</li>
-          <li>Guest history and preference tracking</li>
-          <li>Walk-in and waitlist management</li>
-          <li>Analytics dashboard for owners</li>
-        </ul>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 fade-up">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">Software with a <span>clear purpose</span></h2>
+        <div class="divider"></div>
+        <p class="section-body">
+          Genuvix is a software company focused on building reliable, practical tools for businesses in hospitality and property management. We believe great software should simplify work - not complicate it.
+        </p>
+        <p class="section-body mt-3">
+          Our products are shaped by real-world operational needs, designed to save time, reduce errors, and give business owners the visibility they need to make better decisions.
+        </p>
       </div>
-      <div class="project-visual">
-        <div class="mock-header">
-          <div class="mock-dot" style="background:#ff5f57"></div>
-          <div class="mock-dot" style="background:#febc2e"></div>
-          <div class="mock-dot" style="background:#28c840"></div>
-          <span style="font-size:0.75rem; color:var(--muted); margin-left:0.5rem;">TableFlow · Today's Reservations</span>
-        </div>
-        <div class="mock-row">
-          <div><div class="name">Martinez, Sofia</div><div class="time">19:00 · Table 4 · 2 guests</div></div>
-          <span class="mock-pill pill-blue">Confirmed</span>
-        </div>
-        <div class="mock-row">
-          <div><div class="name">Chen, David</div><div class="time">19:30 · Table 7 · 4 guests</div></div>
-          <span class="mock-pill pill-dark">Seated</span>
-        </div>
-        <div class="mock-row">
-          <div><div class="name">Rossi, Marco</div><div class="time">20:00 · Table 2 · 6 guests</div></div>
-          <span class="mock-pill pill-orange">Pending</span>
-        </div>
-        <div class="mock-row">
-          <div><div class="name">Johnson, Emma</div><div class="time">20:30 · Table 9 · 2 guests</div></div>
-          <span class="mock-pill pill-blue">Confirmed</span>
-        </div>
-        <div class="mock-row">
-          <div><div class="name">Al-Farsi, Khalid</div><div class="time">21:00 · Table 1 · 3 guests</div></div>
-          <span class="mock-pill pill-blue">Confirmed</span>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-sm-6 fade-up">
+            <div class="about-card">
+              <div class="icon"><i class="bi bi-bullseye"></i></div>
+              <h5>Focused Solutions</h5>
+              <p>We build software that solves specific, real problems — no bloated features, just what you actually need.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 fade-up">
+            <div class="about-card">
+              <div class="icon"><i class="bi bi-cloud-check"></i></div>
+              <h5>Cloud-First</h5>
+              <p>All our tools are web-based and accessible from anywhere — no installs, no servers to manage.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 fade-up">
+            <div class="about-card">
+              <div class="icon"><i class="bi bi-person-check"></i></div>
+              <h5>Built for Teams</h5>
+              <p>Intuitive interfaces that your staff can actually use, with minimal training required.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 fade-up">
+            <div class="about-card">
+              <div class="icon"><i class="bi bi-headset"></i></div>
+              <h5>Reliable Support</h5>
+              <p>We're here when you need us. Our team provides responsive, knowledgeable support.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <p class="section-label" style="text-align:center;">Get in touch</p>
-  <h2>Let's build something great.</h2>
-  <p>Have a project in mind? Want to collaborate? Drop us a line at <a href="mailto:info@genuvix.com" style="color:#1a73e8; text-decoration:none;">info@genuvix.com</a> or use the form below.</p>
-  <div class="contact-form">
-    <div class="form-row">
-      <div class="form-group">
-        <label for="fname">First name</label>
-        <input type="text" id="fname" placeholder="Your first name"/>
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <div class="section-label">Our Products</div>
+      <h2 class="section-title">Meet <span>HostBuzz</span></h2>
+      <div class="divider mx-auto"></div>
+      <p class="section-body mx-auto text-center">One platform. Two powerful modules. Everything you need to run your restaurant or short-term rental property at its best.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+
+      <!-- Restaurant Module -->
+      <div class="col-lg-5 col-md-10 fade-up">
+        <div class="product-card">
+          <div class="product-card-header">
+            <div class="product-badge">HostBuzz - Restaurant</div>
+            <h3><i class="bi bi-shop me-2" style="font-size:1.5rem;"></i>Restaurant Management</h3>
+            <p>A complete restaurant management system designed to streamline every aspect of daily operations.</p>
+          </div>
+          <div class="product-card-body">
+            <div class="product-module">
+              <div class="module-icon active"><i class="bi bi-receipt"></i></div>
+              <div>
+                <h6>Order & Table Management</h6>
+                <p>Manage dine-in, takeaway, and delivery orders from a single dashboard with live table tracking.</p>
+              </div>
+            </div>
+            <div class="product-module">
+              <div class="module-icon active"><i class="bi bi-menu-button-wide"></i></div>
+              <div>
+                <h6>Menu & Inventory Control</h6>
+                <p>Update menus on the fly, track ingredient stock, and get alerts before you run out.</p>
+              </div>
+            </div>
+            <div class="product-module">
+              <div class="module-icon active"><i class="bi bi-graph-up-arrow"></i></div>
+              <div>
+                <h6>Sales & Analytics</h6>
+                <p>Daily reports, peak hour insights, and revenue breakdowns to help you make smarter decisions.</p>
+              </div>
+            </div>
+            <div class="mt-3">
+              <span class="feature-pill">POS Ready</span>
+              <span class="feature-pill">Staff Roles</span>
+              <span class="feature-pill">Kitchen Display</span>
+              <span class="feature-pill">Receipts</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="lname">Last name</label>
-        <input type="text" id="lname" placeholder="Your last name"/>
+
+      <!-- PMS Module -->
+      <div class="col-lg-5 col-md-10 fade-up">
+        <div class="product-card">
+          <div class="product-card-header">
+            <div class="product-badge">HostBuzz - PMS</div>
+            <h3><i class="bi bi-house-door me-2" style="font-size:1.5rem;"></i>Property Management</h3>
+            <p>A property management system built for Airbnb hosts and short-term rental operators.</p>
+          </div>
+          <div class="product-card-body">
+            <div class="product-module">
+              <div class="module-icon active"><i class="bi bi-calendar2-check"></i></div>
+              <div>
+                <h6>Booking & Reservations</h6>
+                <p>Sync bookings across platforms, manage availability calendars, and handle guest check-ins seamlessly.</p>
+              </div>
+            </div>
+            <div class="product-module">
+              <div class="module-icon active"><i class="bi bi-people"></i></div>
+              <div>
+                <h6>Guest Management</h6>
+                <p>Store guest profiles, communication history, and automate check-in instructions and messages.</p>
+              </div>
+            </div>
+            <div class="product-module">
+              <div class="module-icon active"><i class="bi bi-cash-coin"></i></div>
+              <div>
+                <h6>Revenue & Reporting</h6>
+                <p>Track occupancy rates, revenue per listing, and payout summaries across all your properties.</p>
+              </div>
+            </div>
+            <div class="mt-3">
+              <span class="feature-pill">Multi-Property</span>
+              <span class="feature-pill">Airbnb Sync</span>
+              <span class="feature-pill">Auto Messaging</span>
+              <span class="feature-pill">Payouts</span>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="you@company.com"/>
-    </div>
-    <div class="form-group">
-      <label for="msg">Message</label>
-      <textarea id="msg" rows="4" placeholder="Tell us about your project..."></textarea>
-    </div>
-    <button class="submit-btn" onclick="this.textContent='Sent! ✓'; this.style.background='#1557b0'; this.disabled=true;">Send message</button>
   </div>
 </section>
 
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-4 fade-up">
+        <div class="section-label" style="color: var(--light-blue);">Contact Us</div>
+        <h2 class="section-title">Let's talk <span style="color:var(--light-blue);">business</span></h2>
+        <div class="divider"></div>
+        <p class="section-body mb-4">Interested in HostBuzz or want to learn more about what Genuvix can do for your business? We'd love to hear from you.</p>
+
+        <div class="contact-info-item">
+          <div class="ci-icon"><i class="bi bi-envelope"></i></div>
+          <div>
+            <h6>Email</h6>
+            <p>service.genuvix@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon"><i class="bi bi-globe"></i></div>
+          <div>
+            <h6>Product</h6>
+            <p>HostBuzz - Restaurant & PMS</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon"><i class="bi bi-clock"></i></div>
+          <div>
+            <h6>Response Time</h6>
+            <p>Within 24 hours</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 fade-up">
+        <div class="contact-form-wrap">
+          <form id="contactForm" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" placeholder="John" required/>
+              </div>
+              <div class="col-sm-6">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" placeholder="Doe" required/>
+              </div>
+              <div class="col-sm-6">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="john@example.com" required/>
+              </div>
+              <div class="col-sm-6">
+                <label for="interest">I'm interested in</label>
+                <select class="form-select" id="interest">
+                  <option value="" disabled selected>Select a product</option>
+                  <option>HostBuzz - Restaurant Management</option>
+                  <option>HostBuzz - Property Management (PMS)</option>
+                  <option>Both Products</option>
+                  <option>General Enquiry</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your business and what you're looking for..."></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-submit">
+                  <i class="bi bi-send me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+          <div id="formSuccess" class="mt-3 text-center d-none" style="color:#a8c8f0; font-weight:600;">
+            <i class="bi bi-check-circle me-2"></i>Thanks! We'll be in touch within 24 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <a href="#hero" class="logo">genu<span>vix</span></a>
-  <p>© 2026 Genuvix. All rights reserved.</p>
-  <p style="color:var(--muted); font-size:0.82rem;"><a href="mailto:info@genuvix.com" style="color:#1a73e8; text-decoration:none;">info@genuvix.com</a></p>
+  <div class="container">
+    <p class="mb-1"><strong style="color:rgba(255,255,255,0.7)">GENUVIX</strong> &nbsp;|&nbsp; Smart Software Solutions</p>
+    <p>© 2026 Genuvix. All rights reserved. &nbsp;·&nbsp; <a href="mailto:service.genuvix@gmail.com">service.genuvix@gmail.com</a></p>
+  </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit (frontend only)
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('formSuccess').classList.remove('d-none');
+  });
+</script>
 </body>
 </html>
